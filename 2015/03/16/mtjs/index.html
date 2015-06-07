@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈mtjs | xinsw</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为什么要使用MT呢?　　当下快速迭代版本过程中，我们有时候只修改了某个js中的少量代码，却需要用户下载整个js文件，这在重视流量的移动端显得非常浪费， mtjs独创的增强更新算法实现了修改多少代码就只下载修改代码的功能，为用户和公司节省大量流量。
+注意事项　　mtjs只需要浏览器环境支持localstorage即可（IOS，android手机端的无痕模式无效）
+原理简介   　　localStor">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈mtjs">
+<meta property="og:url" content="http://xinsw.cn/2015/03/16/mtjs/index.html">
+<meta property="og:site_name" content="xinsw">
+<meta property="og:description" content="为什么要使用MT呢?　　当下快速迭代版本过程中，我们有时候只修改了某个js中的少量代码，却需要用户下载整个js文件，这在重视流量的移动端显得非常浪费， mtjs独创的增强更新算法实现了修改多少代码就只下载修改代码的功能，为用户和公司节省大量流量。
+注意事项　　mtjs只需要浏览器环境支持localstorage即可（IOS，android手机端的无痕模式无效）
+原理简介   　　localStor">
+<meta property="og:image" content="/image/storeinc.png">
+<meta property="og:image" content="/image/mtshow.gif">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈mtjs">
+<meta name="twitter:description" content="为什么要使用MT呢?　　当下快速迭代版本过程中，我们有时候只修改了某个js中的少量代码，却需要用户下载整个js文件，这在重视流量的移动端显得非常浪费， mtjs独创的增强更新算法实现了修改多少代码就只下载修改代码的功能，为用户和公司节省大量流量。
+注意事项　　mtjs只需要浏览器环境支持localstorage即可（IOS，android手机端的无痕模式无效）
+原理简介   　　localStor">
+  
+  
+    <link rel="icon" href="/image/logo-header-xinsw.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  
+    <link rel="stylesheet" href="/scrollLoading/style.css" type="text/css">
+  
+  
+
+
+  
+    <style type="text/css">
+      .logo { background-image:url(/image/logo-header-xinsw.png); }
+    </style>
+  
+
+  
+    <link href='//fonts.useso.com/css?family=Titillium+Web:300,400,600' rel='stylesheet' type='text/css'>
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+</head>
+
+<body>
+  <div id="wrap">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div class="container">
+      <div class="container-inner">
+        <div id="header-title">
+          <h1 class="logo-wrap">
+            <a href="/" class="logo"></a>
+          </h1>
+          
+            <h2 class="subtitle-wrap">
+              <p class="subtitle">用心成为专注于移动前端技术，交互设计，用户研究的UED!!!!!</p>
+            </h2>
+          
+        </div>
+        <div id="header-inner" class="nav-container">
+          <a id="main-nav-toggle" class="nav-icon"></a>
+          <div class="nav-container-inner">
+            <ul id="main-nav">
+              
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/">首页</a></li>
+              
+                    <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/css/">css</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/css/css2/">css2</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/javascript/">javascript</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/javascript/总结/">总结</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/总结/">总结</a></li></ul>
+                  
+                <li class="main-nav-list-item" ><a class="main-nav-list-link" href="/about/index.html">关于</a></li>
+              
+            </ul>
+            <nav id="sub-nav">
+              <div id="search-form-wrap">
+                <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="搜索"><input type="hidden" name="q" value="site:http://xinsw.cn"></form>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="container">
+      <div class="main-body container-inner">
+        <div class="main-body-inner">
+          <section id="main">
+            <div class="main-body-header">
+
+              <h1 class="header"><a class="page-title-link" href="/categories/javascript/">javascript</a><i class="icon" id="icon-angle-right"></i><a class="page-title-link" href="/categories/javascript/总结/">总结</a></h1>
+            </div>
+            <div class="main-body-content">
+              
+  <article id="post-mtjs" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+      <!--  -->
+      
+        <header class="article-header">
+          
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈mtjs
+    </h1>
+  
+
+        </header>
+      
+      <p class="article-byline">
+        <a href="/2015/03/16/mtjs/" class="article-date">
+  <time datetime="2015-03-16T03:18:49.000Z" itemprop="datePublished">2015-03-16</time>
+</a>
+      </p>
+      <div class="article-entry" itemprop="articleBody">
+        <h4 id="为什么要使用MT呢?">为什么要使用MT呢?</h4><p>　　当下快速迭代版本过程中，我们有时候只修改了某个js中的少量代码，却需要用户下载整个js文件，这在重视流量的移动端显得非常浪费， <a href="http://mt.tencent.com/" target="_blank" rel="external">mtjs</a>独创的<strong>增强更新算法实现了修改多少代码就只下载修改代码的功能</strong>，为用户和公司节省大量流量。</p>
+<h4 id="注意事项">注意事项</h4><p>　　<a href="http://mt.tencent.com/" target="_blank" rel="external">mtjs</a>只需要浏览器环境支持localstorage即可（IOS，android手机端的无痕模式无效）</p>
+<h4 id="原理简介">原理简介</h4><p>   <img src="/image/storeinc.png" alt="流程图" title="流程图"><br>　　localStorage存储上一次版本号和内容，当当前版本号和localStorage不一致的时候，<a href="http://mt.tencent.com/" target="_blank" rel="external">mtjs</a>会拼接出“修改的”文件url去拉取“新”文件，并和localStorage的内容合并生成。整个方案得核心在于增量文件得计算和合并。<br>　　核心算法资料：(<font color="red">ps:我没有细研，有兴趣的可以看以下PDF</font>)<br>　　1. <a href="http://mt.tencent.com/" target="_blank" rel="external">基于chunk的增量更新算法</a><br>　　2. <a href="http://mtjs.github.io/img/mt2.pdf" target="_blank" rel="external">基于编辑距离计算的增量更新算法</a></p>
+<h4 id="运行效果">运行效果</h4><p>   <img src="/image/mtshow.gif" alt="MT运行效果" title="MT运行效果"></p>
+<h4 id="个人小结">个人小结</h4><p>　　运行时会拿MT.config中的版本号对比本地(loacalStorage)中的版本号，发现一样直接使用本地的文件，从而<strong>不发送请求</strong>到服务端，节约了网络开销，如果发现了不一样的会对比<strong>历史版本和新版的差异，把差异的内容用数组下标对应插入到本地</strong>。<br>　　注意事项:在初次使用<a href="http://mt.tencent.com/" target="_blank" rel="external">mtjs</a>官方的例子中出现一些小问题浪费了不少时间（<span style="color:red">如：1、提示缺失zepto.min.js，需要注在打包环境中的找zepto的代码，2、java源码算法会出现错位</span>）,localStorage本身的限制，必须是AMD都是一方面的限制，官方很久没有更新，不知是否在继续维护也是一个隐患。虽然我个人暂时项目中使用不到但是MTJS作为一个技术储备还是受益匪浅！</p>
+
+      </div>
+      <footer class="article-footer">
+        <a data-url="http://xinsw.cn/2015/03/16/mtjs/" data-id="ciaf7wnfx000dcx759bqpn1mq" class="article-share-link">分享到</a>
+          
+          <section id="comments">
+              <!-- 多说评论框 start -->
+              <div class="ds-thread" data-thread-key="post-mtjs" data-title="浅谈mtjs" data-url="http://xinsw.cn/2015/03/16/mtjs/"></div>
+              <!-- 多说评论框 end -->
+              <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+              <script type="text/javascript">
+                  var duoshuoQuery = {short_name:'testxin'};
+                  (function() {
+                      var ds = document.createElement('script');
+                      ds.type = 'text/javascript';ds.async = true;
+                      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                      ds.charset = 'UTF-8';
+                      (document.getElementsByTagName('head')[0]
+                      || document.getElementsByTagName('body')[0]).appendChild(ds);
+                  })();
+              </script>
+              <!-- 多说公共JS代码 end -->
+          </section>
+          
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/优化/">优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/解决方案/">解决方案</a></li></ul>
+
+      </footer>
+    </div>
+  </article>
+  
+
+            </div>
+          </section>
+          <aside id="sidebar">
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+  <div class="sidebar-top">
+    <p>关注我 :</p>
+    <ul class="social-links">
+      
+        <li><a class="social-tooltip" title="github" href="https://github.com/testxin/"><i id="icon-github" class="icon"></i></a></li>
+      
+        <li><a class="social-tooltip" title="weibo" href="http://weibo.com/xinsw/home?wvr=5"><i id="icon-weibo" class="icon"></i></a></li>
+      
+        <li><a class="social-tooltip" title="rss" href="/atom.xml"><i id="icon-rss" class="icon"></i></a></li>
+      
+    </ul>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/23/浅谈移动web屏幕尺寸兼容/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <p class="article-nav-title">
+        
+          移动web屏幕尺寸知识
+        
+      </p>
+      <i class="icon" id="icon-chevron-right"></i>
+    </a>
+  
+  
+    <a href="/2014/03/23/块级和行内元素/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <p class="article-nav-title">块级和行内元素</p>
+      <i class="icon" id="icon-chevron-left"></i>
+    </a>
+  
+</nav>
+
+  
+  <div class="widgets-container">
+    
+      
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul id="recent-post">
+        
+          <li>
+            <div class="item-thumbnail">
+              <a href="/2015/04/23/浅谈移动web屏幕尺寸兼容/" class="thumbnail">
+  
+    <span style="background-image:url(/image/android－2015-04.png
+)" alt="移动web屏幕尺寸知识" class="thumbnail-image"></span>
+  
+
+</a>
+            </div>
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/总结/">总结</a></p>
+              <p class="item-title"><a href="/2015/04/23/浅谈移动web屏幕尺寸兼容/" class="title">移动web屏幕尺寸知识</a></p>
+              <p class="item-date"><time datetime="2015-04-23T13:07:45.000Z" itemprop="datePublished">2015-04-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            <div class="item-thumbnail">
+              <a href="/2015/03/16/mtjs/" class="thumbnail">
+  
+    <span style="background-image:url(/image/storeinc.png
+)" alt="浅谈mtjs" class="thumbnail-image"></span>
+  
+
+</a>
+            </div>
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/javascript/">javascript</a><i class="icon" id="icon-angle-right"></i><a class="article-category-link" href="/categories/javascript/总结/">总结</a></p>
+              <p class="item-title"><a href="/2015/03/16/mtjs/" class="title">浅谈mtjs</a></p>
+              <p class="item-date"><time datetime="2015-03-16T03:18:49.000Z" itemprop="datePublished">2015-03-16</time></p>
+            </div>
+          </li>
+        
+          <li>
+            <div class="item-thumbnail">
+              <a href="/2014/03/23/块级和行内元素/" class="thumbnail">
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+
+</a>
+            </div>
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/css/">css</a><i class="icon" id="icon-angle-right"></i><a class="article-category-link" href="/categories/css/css2/">css2</a></p>
+              <p class="item-title"><a href="/2014/03/23/块级和行内元素/" class="title">块级和行内元素</a></p>
+              <p class="item-date"><time datetime="2014-03-23T13:07:45.000Z" itemprop="datePublished">2014-03-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            <div class="item-thumbnail">
+              <a href="/2013/08/23/iconfont实用技巧/" class="thumbnail">
+  
+    <span style="background-image:url(/2013/08/23/iconfont实用技巧/.png
+)" alt="iconfont实用技巧" class="thumbnail-image"></span>
+  
+
+</a>
+            </div>
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/总结/">总结</a></p>
+              <p class="item-title"><a href="/2013/08/23/iconfont实用技巧/" class="title">iconfont实用技巧</a></p>
+              <p class="item-date"><time datetime="2013-08-23T04:07:45.000Z" itemprop="datePublished">2013-08-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            <div class="item-thumbnail">
+              <a href="/2013/08/23/iconfont制作教程/" class="thumbnail">
+  
+    <span style="background-image:url(/2013/08/23/iconfont制作教程/.gif
+)" alt="iconfont制作教程" class="thumbnail-image"></span>
+  
+
+</a>
+            </div>
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/总结/">总结</a></p>
+              <p class="item-title"><a href="/2013/08/23/iconfont制作教程/" class="title">iconfont制作教程</a></p>
+              <p class="item-date"><time datetime="2013-08-23T04:07:45.000Z" itemprop="datePublished">2013-08-23</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/css/css2/">css2</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/总结/">总结</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/总结/">总结</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/03/">三月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">八月 2013</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解决方案/">解决方案</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-float">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/优化/" style="font-size: 20px;">优化</a><a href="/tags/基础/" style="font-size: 15px;">基础</a><a href="/tags/框架/" style="font-size: 10px;">框架</a><a href="/tags/解决方案/" style="font-size: 10px;">解决方案</a>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://hexo.io/">HEXO</a>
+          </li>
+        
+          <li>
+            <a href="http://mt.tencent.com/">MT</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</aside>
+        </div>
+      </div>
+    </div>
+    <footer id="footer">
+    
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon" id="icon-angle-up"></i></a>
+
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+
+                <p>&copy; 2015 辛善武</p>
+
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+  <script src="/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
+  <script src="/scrollLoading/main.js" type="text/javascript"></script>
+
+
+<script src="/js/html-patch.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
