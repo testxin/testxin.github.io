@@ -151,7 +151,7 @@
     <link href="http://xinsw.cn/2013/08/23/iconfont%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/"/>
     <id>http://xinsw.cn/2013/08/23/iconfont制作教程/</id>
     <published>2013-08-23T04:07:45.000Z</published>
-    <updated>2015-06-07T12:38:59.000Z</updated>
+    <updated>2015-09-28T16:21:46.000Z</updated>
     <content type="html"><![CDATA[<p><img src="1.gif" alt="导入字体文件" title="导入字体文件">　<br><img src="2.gif" alt="新增一个空的icon描述" title="新增一个空的icon描述">　<br><strong><span style="color:red">icon描述会对应content的编码，并且是unicode</span></strong></p>
 <pre><code><span class="class">.icon-mobile</span><span class="pseudo">:before</span><span class="rules">{ 
     <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">'\e837'</span></span></span>;<span class="rule">}</span></span>
